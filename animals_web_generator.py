@@ -10,15 +10,16 @@ def load_data(file_path):
 def generate_animals_data(animals_data):
     html_animals_infos = ""
     for animal in animals_data:
+        html_animals_infos += "<li class='cards_item'>\n"
         if animal.get('name'):
-            html_animals_infos += f"Name: {animal['name']}\n"
+            html_animals_infos += f"Name: {animal['name']}<br>\n"
         if animal['characteristics'].get('order'):
-            html_animals_infos += f"Diet: {animal['characteristics']['order']}\n"
+            html_animals_infos += f"Diet: {animal['characteristics']['order']}<br>\n"
         if animal.get('locations'):
-            html_animals_infos += f"Location: {animal['locations']}\n"
+            html_animals_infos += f"Location: {animal['locations']}<br>\n"
         if animal['characteristics'].get('type'):
-            html_animals_infos += f"Type: {animal['characteristics']['type']}\n"
-        html_animals_infos += "\n"
+            html_animals_infos += f"Type: {animal['characteristics']['type']}<br>\n"
+        html_animals_infos += "<br><li>\n"
     return html_animals_infos
 
 def main():
