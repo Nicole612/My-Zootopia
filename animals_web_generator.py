@@ -39,7 +39,11 @@ def main():
     animals_data = res.json()
     with open("animals_template.html", "r") as file:
         template_html = file.read()
-    updated_html_file = template_html.replace("__REPLACE_ANIMALS_INFO__", generate_animals_data(animals_data) )
+    if not animals_data:
+        fehler_meldung = f"<h2 style='color: crimson; text-align: center;'>The animal '{animal_query}' doesn't exist.</h2>"
+        updated_html_file = template_html.replace("__REPLACE_ANIMALS_INFO__", fehler_meldung)
+    else:
+        updated_html_file = template_html.replace("__REPLACE_ANIMALS_INFO__", generate_animals_data(animals_data))
     with open("animals.html", "w") as f:
         f.write(updated_html_file)
 
