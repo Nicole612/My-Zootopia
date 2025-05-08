@@ -34,7 +34,8 @@ def generate_animals_data(animals_data):
 
 def main():
     API_KEY = "0mRBFkXQco3Snim/4O343Q==qRv3QTRm0jPEkVg6"
-    res = requests.get(f"https://api.api-ninjas.com/v1/animals?name=Fox", headers={"X-Api-Key": API_KEY})
+    animal_query = input("Enter a name of an animal: ")
+    res = requests.get(f"https://api.api-ninjas.com/v1/animals?name={animal_query}", headers={"X-Api-Key": API_KEY})
     animals_data = res.json()
     with open("animals_template.html", "r") as file:
         template_html = file.read()
