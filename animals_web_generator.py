@@ -1,12 +1,6 @@
-import requests
-import json
+import data_fetcher
 from tempfile import template
 
-
-def load_data(file_path):
-  """ Loads a JSON file """
-  with open(file_path, "r") as handle:
-    return json.load(handle)
 
 def serialize_animal(animal):
     """Generates HTML for a single animal as a <li> element"""
@@ -32,11 +26,10 @@ def generate_animals_data(animals_data):
         html_animals_infos += serialize_animal(animal)
     return html_animals_infos
 
+
 def main():
-    API_KEY = "0mRBFkXQco3Snim/4O343Q==qRv3QTRm0jPEkVg6"
     animal_query = input("Enter a name of an animal: ")
-    res = requests.get(f"https://api.api-ninjas.com/v1/animals?name={animal_query}", headers={"X-Api-Key": API_KEY})
-    animals_data = res.json()
+    animals_data = data_fetcher.fetch_data(animal_query)
     with open("animals_template.html", "r") as file:
         template_html = file.read()
     if not animals_data:
@@ -46,6 +39,7 @@ def main():
         updated_html_file = template_html.replace("__REPLACE_ANIMALS_INFO__", generate_animals_data(animals_data))
     with open("animals.html", "w") as f:
         f.write(updated_html_file)
+
 
 if __name__ == "__main__":
     main()
