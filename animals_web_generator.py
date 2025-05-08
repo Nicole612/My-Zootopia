@@ -1,5 +1,4 @@
 import data_fetcher
-from tempfile import template
 
 
 def serialize_animal(animal):
